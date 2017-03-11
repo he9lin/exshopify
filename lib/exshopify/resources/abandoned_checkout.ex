@@ -66,7 +66,7 @@ defmodule ExShopify.AbandonedCheckout do
       customer: %ExShopify.Customer{},
       discount_codes: [%ExShopify.DiscountCode{}],
       line_items: [%ExShopify.LineItem{}],
-      shipping_address: [%ExShopify.Address{}],
+      shipping_address: %ExShopify.Address{},
       shipping_lines: [ExShopify.ShippingLine.response_mapping],
       tax_lines: [%ExShopify.TaxLine{}]
     }
