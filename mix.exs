@@ -45,8 +45,9 @@ defmodule ExShopify.Mixfile do
   end
 
   defp package do
-    [maintainers: ["Anthony Smith"],
-     licenses: ["MIT"],
-     links: %{github: "https://github.com/sticksnleaves/exshopify"}]
+    %{ licenses: ["MIT"],
+       maintainers: ["Anthony Smith"],
+       links: %{ "GitHub" => "https://github.com/sticksnleaves/exshopify"},
+       files: ~w(lib mix.exs README* LICENSE* CHANGELOG*) }
   end
 end
