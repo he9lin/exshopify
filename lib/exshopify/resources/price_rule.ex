@@ -117,4 +117,3 @@ defmodule ExShopify.PriceRule do
     %__MODULE__{}
   end
 end
-

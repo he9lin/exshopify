@@ -44,7 +44,7 @@ defmodule ExShopify.CustomerAddress do
   @spec create(%ExShopify.Session{}, integer | String.t, map) :: customer_address_plural | ExShopify.Resource.error
   def create(session, customer_id, params) do
     request(:post, "/customers/#{customer_id}/addresses.json", wrap_in_object(params, "address"), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -74,7 +74,7 @@ defmodule ExShopify.CustomerAddress do
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t) :: customer_address_singular | ExShopify.Resource.error
   def find(session, id, customer_id) do
     request(:get, "/customers/#{customer_id}/addresses/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -95,7 +95,7 @@ defmodule ExShopify.CustomerAddress do
   @spec list(%ExShopify.Session{}, integer | String.t, map) :: customer_address_plural | ExShopify.Resource.error
   def list(session, customer_id, params) do
     request(:get, "/customers/#{customer_id}/addresses.json", params, session)
-    |> decode(decoder("addresses", [response_mapping]))
+    |> decode(decoder("addresses", [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}, integer | String.t) :: customer_address_plural | ExShopify.Resource.error
@@ -114,7 +114,7 @@ defmodule ExShopify.CustomerAddress do
   @spec set_default(%ExShopify.Session{}, integer | String.t, integer | String.t) :: customer_address_singular | ExShopify.Resource.error
   def set_default(session, id, customer_id) do
     request(:put, "/customers/#{customer_id}/addresses/#{id}/default.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -132,11 +132,11 @@ defmodule ExShopify.CustomerAddress do
   @spec update(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: customer_address_singular | ExShopify.Resource.error
   def update(session, id, customer_id, params) do
     request(:put, "/customers/#{customer_id}/addresses/#{id}.json", wrap_in_object(params, "address"), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

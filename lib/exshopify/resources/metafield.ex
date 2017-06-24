@@ -89,7 +89,7 @@ defmodule ExShopify.Metafield do
   @spec create(%ExShopify.Session{}, map) :: metafield_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/metafields.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -110,7 +110,7 @@ defmodule ExShopify.Metafield do
   @spec create_from_product(%ExShopify.Session{}, integer | String.t, map) :: metafield_singular | ExShopify.Resource.error
   def create_from_product(session, product_id, params) do
     request(:post, "/products/#{product_id}/metafields.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -124,7 +124,7 @@ defmodule ExShopify.Metafield do
   @spec find(%ExShopify.Session{}, integer | String.t) :: metafield_singular | ExShopify.Resource.error
   def find(session, id) do
     request(:get, "/metafields/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -138,7 +138,7 @@ defmodule ExShopify.Metafield do
   @spec find_from_product(%ExShopify.Session{}, integer | String.t, integer | String.t) :: metafield_singular | ExShopify.Resource.error
   def find_from_product(session, id, product_id) do
     request(:get, "/products/#{product_id}/metafields/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -165,7 +165,7 @@ defmodule ExShopify.Metafield do
   @spec list(%ExShopify.Session{}, map) :: metafield_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/metafields.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: metafield_plural | ExShopify.Resource.error
@@ -184,7 +184,7 @@ defmodule ExShopify.Metafield do
   @spec list_from_product(%ExShopify.Session{}, integer | String.t) :: metafield_plural | ExShopify.Resource.error
   def list_from_product(session, product_id) do
     request(:get, "/products/#{product_id}/metafields.json", %{}, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @doc """
@@ -200,7 +200,7 @@ defmodule ExShopify.Metafield do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: metafield_plural | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/metafields/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -216,11 +216,11 @@ defmodule ExShopify.Metafield do
   @spec update_from_product(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: metafield_singular | ExShopify.Resource.error
   def update_from_product(session, id, product_id, params) do
     request(:put, "/products/#{product_id}/metafields/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

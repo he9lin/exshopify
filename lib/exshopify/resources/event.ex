@@ -47,7 +47,7 @@ defmodule ExShopify.Event do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: event_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/events/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: event_singular | ExShopify.Resource.error
@@ -88,7 +88,7 @@ defmodule ExShopify.Event do
   @spec list(%ExShopify.Session{}, map) :: event_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/events.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: event_plural | ExShopify.Resource.error
@@ -107,7 +107,7 @@ defmodule ExShopify.Event do
   @spec list_from_order(%ExShopify.Session{}, integer | String.t, map) :: event_plural | ExShopify.Resource.error
   def list_from_order(session, order_id, params) do
     request(:get, "/orders/#{order_id}/events.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list_from_order(%ExShopify.Session{}, integer | String.t) :: event_plural | ExShopify.Resource.error
@@ -126,7 +126,7 @@ defmodule ExShopify.Event do
   @spec list_from_product(%ExShopify.Session{}, integer | String.t, map) :: event_plural | ExShopify.Resource.error
   def list_from_product(session, product_id, params) do
     request(:get, "/products/#{product_id}/events.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list_from_product(%ExShopify.Session{}, integer | String.t) :: event_plural | ExShopify.Resource.error
@@ -135,7 +135,7 @@ defmodule ExShopify.Event do
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

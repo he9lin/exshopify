@@ -61,7 +61,7 @@ defmodule ExShopify.ProductImage do
   @spec create(%ExShopify.Session{}, integer | String.t, map) :: product_image_singular | ExShopify.Resource.error
   def create(session, product_id, params) do
     request(:post, "/products/#{product_id}/images.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -89,7 +89,7 @@ defmodule ExShopify.ProductImage do
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: product_image_singular | ExShopify.Resource.error
   def find(session, id, product_id, params) do
     request(:get, "/products/#{product_id}/images/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t) :: product_image_singular | ExShopify.Resource.error
@@ -108,7 +108,7 @@ defmodule ExShopify.ProductImage do
   @spec list(%ExShopify.Session{}, integer | String.t, map) :: product_image_plural | ExShopify.Resource.error
   def list(session, product_id, params) do
     request(:get, "/products/#{product_id}/images.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}, integer | String.t) :: product_image_plural | ExShopify.Resource.error
@@ -137,11 +137,11 @@ defmodule ExShopify.ProductImage do
   @spec update(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: product_image_singular | ExShopify.Resource.error
   def update(session, id, product_id, params) do
     request(:put, "/products/#{product_id}/images/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

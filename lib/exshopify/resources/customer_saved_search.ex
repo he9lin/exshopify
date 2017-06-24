@@ -68,7 +68,7 @@ defmodule ExShopify.CustomerSavedSearch do
   @spec create(%ExShopify.Session{}, map) :: customer_saved_search_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/customer_saved_searches.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -83,7 +83,7 @@ defmodule ExShopify.CustomerSavedSearch do
   @spec customers(%ExShopify.Session{}, integer | String.t, map) :: ExShopify.Customer.customer_plural | ExShopify.Resource.error
   def customers(session, customer_saved_search_id, params) do
     request(:get, "/customer_saved_searches/#{customer_saved_search_id}/customers.json", params, session)
-    |> decode(decoder("customers", [ExShopify.Customer.response_mapping]))
+    |> decode(decoder("customers", [ExShopify.Customer.response_mapping()]))
   end
 
   @spec customers(%ExShopify.Session{}, integer | String.t) :: ExShopify.Customer.customer_plural | ExShopify.Resource.error
@@ -116,7 +116,7 @@ defmodule ExShopify.CustomerSavedSearch do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: customer_saved_search_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/customer_saved_searches/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: customer_saved_search_singular | ExShopify.Resource.error
@@ -142,7 +142,7 @@ defmodule ExShopify.CustomerSavedSearch do
   @spec list(%ExShopify.Session{}, map) :: customer_saved_search_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/customer_saved_searches.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: customer_saved_search_plural | ExShopify.Resource.error
@@ -163,11 +163,11 @@ defmodule ExShopify.CustomerSavedSearch do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: customer_saved_search_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/customer_saved_searches/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

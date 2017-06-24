@@ -6,9 +6,9 @@ defmodule ExShopify.RefundLineItem do
   defstruct [:id, :line_item, :line_item_id, :quantity]
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.RefundLineItem{
-      line_item: ExShopify.LineItem.response_mapping
+      line_item: ExShopify.LineItem.response_mapping()
     }
   end
 end

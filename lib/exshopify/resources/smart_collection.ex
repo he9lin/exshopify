@@ -88,7 +88,7 @@ defmodule ExShopify.SmartCollection do
   @spec create(%ExShopify.Session{}, map) :: smart_collection_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/smart_collections.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -116,7 +116,7 @@ defmodule ExShopify.SmartCollection do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: smart_collection_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/smart_collections/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: smart_collection_singular | ExShopify.Resource.error
@@ -135,7 +135,7 @@ defmodule ExShopify.SmartCollection do
   @spec list(%ExShopify.Session{}, map) :: smart_collection_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/smart_collections.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: smart_collection_plural | ExShopify.Resource.error
@@ -188,11 +188,11 @@ defmodule ExShopify.SmartCollection do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: smart_collection_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/smart_collections/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.SmartCollection{
       image: %ExShopify.Image{},
       rules: [%ExShopify.SmartCollectionRule{}]

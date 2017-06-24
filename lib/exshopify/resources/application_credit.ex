@@ -43,7 +43,7 @@ defmodule ExShopify.ApplicationCredit do
   @spec create(%ExShopify.Session{}, map) :: application_credit_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/application_credits.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -57,7 +57,7 @@ defmodule ExShopify.ApplicationCredit do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: application_credit_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/application_credits/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: application_credit_singular | ExShopify.Resource.error
@@ -76,7 +76,7 @@ defmodule ExShopify.ApplicationCredit do
   @spec list(%ExShopify.Session{}, map) :: application_credit_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/application_credits.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: application_credit_plural | ExShopify.Resource.error
@@ -85,7 +85,7 @@ defmodule ExShopify.ApplicationCredit do
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.ApplicationCredit{}
   end
 end

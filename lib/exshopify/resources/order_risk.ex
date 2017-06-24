@@ -35,7 +35,7 @@ defmodule ExShopify.OrderRisk do
   @spec create(%ExShopify.Session{}, integer | String.t, map) :: order_risk_singular | ExShopify.Resource.error
   def create(session, order_id, params) do
     request(:post, "/orders/#{order_id}/risks.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -63,7 +63,7 @@ defmodule ExShopify.OrderRisk do
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t) :: order_risk_singular | ExShopify.Resource.error
   def find(session, id, order_id) do
     request(:get, "/orders/#{order_id}/risks/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -77,7 +77,7 @@ defmodule ExShopify.OrderRisk do
   @spec list(%ExShopify.Session{}, integer | String.t) :: order_risk_plural | ExShopify.Resource.error
   def list(session, order_id) do
     request(:get, "/orders/#{order_id}/risks.json", %{}, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @doc """
@@ -99,11 +99,11 @@ defmodule ExShopify.OrderRisk do
   @spec update(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: order_risk_singular | ExShopify.Resource.error
   def update(session, id, order_id, params) do
     request(:put, "/orders/#{order_id}/risks/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

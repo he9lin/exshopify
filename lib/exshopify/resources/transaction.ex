@@ -57,7 +57,7 @@ defmodule ExShopify.Transaction do
   @spec create(%ExShopify.Session{}, integer | String.t, map) :: transaction_singular | ExShopify.Resource.error
   def create(session, order_id, params) do
     request(:post, "/orders/#{order_id}/transactions.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -71,7 +71,7 @@ defmodule ExShopify.Transaction do
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: transaction_singular | ExShopify.Resource.error
   def find(session, id, order_id, params) do
     request(:get, "/orders/#{order_id}/transactions/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t) :: transaction_singular | ExShopify.Resource.error
@@ -90,7 +90,7 @@ defmodule ExShopify.Transaction do
   @spec list(%ExShopify.Session{}, integer | String.t, map) :: transaction_plural | ExShopify.Resource.error
   def list(session, order_id, params) do
     request(:get, "/orders/#{order_id}/transactions.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}, integer | String.t) :: transaction_plural | ExShopify.Resource.error
@@ -99,7 +99,7 @@ defmodule ExShopify.Transaction do
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.Transaction{
       payment_details: %ExShopify.PaymentDetails{}
     }

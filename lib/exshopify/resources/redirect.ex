@@ -49,7 +49,7 @@ defmodule ExShopify.Redirect do
   @spec create(%ExShopify.Session{}, map) :: redirect_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/redirects.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -77,7 +77,7 @@ defmodule ExShopify.Redirect do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: redirect_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/redirects/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: redirect_singular | ExShopify.Resource.error
@@ -96,7 +96,7 @@ defmodule ExShopify.Redirect do
   @spec list(%ExShopify.Session{}, map) :: redirect_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/redirects.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec list(%ExShopify.Session{}) :: redirect_plural | ExShopify.Resource.error
@@ -117,11 +117,11 @@ defmodule ExShopify.Redirect do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: redirect_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/redirects/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

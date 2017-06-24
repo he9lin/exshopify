@@ -163,7 +163,7 @@ defmodule ExShopify.Customer do
   @spec create(%ExShopify.Session{}, map) :: customer_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/customers.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -191,7 +191,7 @@ defmodule ExShopify.Customer do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: customer_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/customers/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: customer_singular | ExShopify.Resource.error
@@ -217,7 +217,7 @@ defmodule ExShopify.Customer do
   @spec list(%ExShopify.Session{}, map) :: customer_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/customers.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: customer_plural | ExShopify.Resource.error
@@ -235,7 +235,7 @@ defmodule ExShopify.Customer do
   @spec search(%ExShopify.Session{}, String.t) :: customer_plural | ExShopify.Resource.error
   def search(session, query) do
     request(:get, "/customers/search.json", %{query: query}, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @doc """
@@ -249,11 +249,11 @@ defmodule ExShopify.Customer do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: customer_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/customers/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.Customer{
       addresses: [%ExShopify.CustomerAddress{}],
       default_address: %ExShopify.CustomerAddress{}

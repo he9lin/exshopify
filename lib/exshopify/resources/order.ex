@@ -73,7 +73,7 @@ defmodule ExShopify.Order do
   @spec cancel(%ExShopify.Session{}, integer | String.t, map) :: order_singular | ExShopify.Resource.error
   def cancel(session, id, params) do
     request(:post, "/orders/#{id}/cancel.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec cancel(%ExShopify.Session{}, integer | String.t) :: order_singular | ExShopify.Resource.error
@@ -111,7 +111,7 @@ defmodule ExShopify.Order do
   @spec close(%ExShopify.Session{}, integer | String.t) :: order_singular | ExShopify.Resource.error
   def close(session, id) do
     request(:post, "/orders/#{id}/close.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -176,7 +176,7 @@ defmodule ExShopify.Order do
   @spec create(%ExShopify.Session{}, map) :: order_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/orders.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -202,7 +202,7 @@ defmodule ExShopify.Order do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: order_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/orders/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: order_singular | ExShopify.Resource.error
@@ -221,7 +221,7 @@ defmodule ExShopify.Order do
   @spec list(%ExShopify.Session{}, map) :: order_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/orders.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: order_plural | ExShopify.Resource.error
@@ -240,7 +240,7 @@ defmodule ExShopify.Order do
   @spec open(%ExShopify.Session{}, integer | String.t) :: order_singular | ExShopify.Resource.error
   def open(session, id) do
     request(:post, "/orders/#{id}/open.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -258,21 +258,21 @@ defmodule ExShopify.Order do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: order_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/orders/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.Order{
       billing_address: %ExShopify.Address{},
       client_details: %ExShopify.ClientDetails{},
       customer: %ExShopify.Customer{},
       discount_codes: [%ExShopify.DiscountCode{}],
-      fulfillments: [ExShopify.OrderFulfillment.response_mapping],
-      line_items: [ExShopify.LineItem.response_mapping],
-      refunds: [ExShopify.Refund.response_mapping],
+      fulfillments: [ExShopify.OrderFulfillment.response_mapping()],
+      line_items: [ExShopify.LineItem.response_mapping()],
+      refunds: [ExShopify.Refund.response_mapping()],
       shipping_address: %ExShopify.Address{},
-      shipping_lines: [ExShopify.ShippingLine.response_mapping],
+      shipping_lines: [ExShopify.ShippingLine.response_mapping()],
       tax_lines: [%ExShopify.TaxLine{}]
     }
   end

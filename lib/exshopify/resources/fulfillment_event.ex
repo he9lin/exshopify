@@ -29,7 +29,7 @@ defmodule ExShopify.FulfillmentEvent do
   @spec create(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: fulfillment_event_singular | ExShopify.Resource.error
   def create(session, fulfillment_id, order_id, params) do
     request(:post, "/orders/#{order_id}/fulfillments/#{fulfillment_id}/events.json", wrap_in_object(params, "event"), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -57,7 +57,7 @@ defmodule ExShopify.FulfillmentEvent do
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t, integer | String.t) :: fulfillment_event_singular | ExShopify.Resource.error
   def find(session, id, fulfillment_id, order_id) do
     request(:get, "/orders/#{order_id}/fulfillments/#{fulfillment_id}/events/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -71,11 +71,11 @@ defmodule ExShopify.FulfillmentEvent do
   @spec list(%ExShopify.Session{}, integer | String.t, integer | String.t) :: fulfillment_event_plural | ExShopify.Resource.error
   def list(session, fulfillment_id, order_id) do
     request(:get, "/orders/#{order_id}/fulfillments/#{fulfillment_id}/events.json", %{}, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

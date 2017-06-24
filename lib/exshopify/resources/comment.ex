@@ -26,7 +26,7 @@ defmodule ExShopify.Comment do
   @spec approve(%ExShopify.Session{}, integer | String.t) :: comment_singular | ExShopify.Resource.error
   def approve(session, id) do
     request(:post, "/comments/#{id}/approve.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -74,7 +74,7 @@ defmodule ExShopify.Comment do
   @spec create(%ExShopify.Comment{}, map) :: comment_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/comments.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -88,7 +88,7 @@ defmodule ExShopify.Comment do
   @spec find(%ExShopify.Session{}, integer | String.t) :: comment_singular | ExShopify.Resource.error
   def find(session, id) do
     request(:get, "/comments/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -113,7 +113,7 @@ defmodule ExShopify.Comment do
   @spec list(%ExShopify.Session{}, map) :: comment_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/comments.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: comment_plural | ExShopify.Resource.error
@@ -132,7 +132,7 @@ defmodule ExShopify.Comment do
   @spec mark_as_spam(%ExShopify.Session{}, integer | String.t) :: comment_singular | ExShopify.Resource.error
   def mark_as_spam(session, id) do
     request(:post, "/comments/#{id}/spam.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -146,7 +146,7 @@ defmodule ExShopify.Comment do
   @spec mark_as_not_spam(%ExShopify.Session{}, integer | String.t) :: comment_singular | ExShopify.Resource.error
   def mark_as_not_spam(session, id) do
     request(:post, "/comments/#{id}/not_spam.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -160,7 +160,7 @@ defmodule ExShopify.Comment do
   @spec remove(%ExShopify.Session{}, integer | String.t) :: comment_singular | ExShopify.Resource.error
   def remove(session, id) do
     request(:post, "/comments/#{id}/remove.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -174,7 +174,7 @@ defmodule ExShopify.Comment do
   @spec restore(%ExShopify.Session{}, integer | String.t) :: comment_singular | ExShopify.Resource.error
   def restore(session, id) do
     request(:post, "/comments/#{id}/restore.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -195,10 +195,10 @@ defmodule ExShopify.Comment do
   @spec update(%ExShopify.Session{}, integer | String.t, %{}) :: comment_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/comments/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

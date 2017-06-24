@@ -112,7 +112,7 @@ defmodule ExShopify.Article do
   @spec create(%ExShopify.Session{}, integer | String.t, map) :: article_singular | ExShopify.Resource.error
   def create(session, blog_id, params) do
     request(:post, "/blogs/#{blog_id}/articles.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -140,7 +140,7 @@ defmodule ExShopify.Article do
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: article_singular | ExShopify.Resource.error
   def find(session, id, blog_id, params) do
     request(:get, "/blogs/#{blog_id}/articles/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t) :: article_singular | ExShopify.Resource.error
@@ -166,7 +166,7 @@ defmodule ExShopify.Article do
   @spec list(%ExShopify.Session{}, integer | String.t, map) :: article_plural | ExShopify.Resource.error
   def list(session, blog_id, params) do
     request(:get, "/blogs/#{blog_id}/articles.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}, integer | String.t) :: article_plural | ExShopify.Resource.error
@@ -252,11 +252,11 @@ defmodule ExShopify.Article do
   @spec update(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: article_singular | ExShopify.Resource.error
   def update(session, id, blog_id, params) do
     request(:put, "/blogs/#{blog_id}/articles/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.Article{
       metafields: [%ExShopify.Metafield{}]
     }

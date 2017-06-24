@@ -32,7 +32,7 @@ defmodule ExShopify.CarrierService do
   @spec create(%ExShopify.Session{}, map) :: carrier_service_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/carrier_services.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -59,7 +59,7 @@ defmodule ExShopify.CarrierService do
   """
   def find(session, id) do
     request(:get, "/carrier_services/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -72,7 +72,7 @@ defmodule ExShopify.CarrierService do
   """
   def list(session) do
     request(:get, "/carrier_services.json", %{}, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @doc """
@@ -92,11 +92,11 @@ defmodule ExShopify.CarrierService do
   """
   def update(session, id, params) do
     request(:put, "/carrier_services/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

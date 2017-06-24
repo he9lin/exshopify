@@ -23,11 +23,11 @@ defmodule ExShopify.Policy do
   @spec list(%ExShopify.Session{}) :: policy_plural | ExShopify.Resource.error
   def list(session) do
     request(:get, "/policies.json", %{}, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

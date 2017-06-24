@@ -120,7 +120,7 @@ defmodule ExShopify.CustomCollection do
   @spec create(%ExShopify.Session{}, map) :: custom_collection_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/custom_collections.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -148,7 +148,7 @@ defmodule ExShopify.CustomCollection do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: custom_collection_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/custom_collections/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: custom_collection_singular | ExShopify.Resource.error
@@ -179,7 +179,7 @@ defmodule ExShopify.CustomCollection do
   @spec list(%ExShopify.Session{}, map) :: custom_collection_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/custom_collections.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: custom_collection_plural | ExShopify.Resource.error
@@ -223,11 +223,11 @@ defmodule ExShopify.CustomCollection do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: custom_collection_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/custom_collections/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.CustomCollection{
       image: %ExShopify.Image{},
       metafields: [%ExShopify.Metafield{}]

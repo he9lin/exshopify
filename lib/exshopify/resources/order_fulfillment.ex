@@ -7,9 +7,9 @@ defmodule ExShopify.OrderFulfillment do
              :tracking_company, :tracking_number, :updated_at]
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.OrderFulfillment{
-      line_items: [ExShopify.LineItem.response_mapping]
+      line_items: [ExShopify.LineItem.response_mapping()]
     }
   end
 end

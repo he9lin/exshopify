@@ -10,7 +10,7 @@ defmodule ExShopify.LineItem do
              :total_discount, :title, :variant_id, :variant_title, :vendor]
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.LineItem{
       properties: [%ExShopify.Property{}],
       tax_lines: [%ExShopify.TaxLine{}]

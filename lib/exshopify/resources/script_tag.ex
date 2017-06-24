@@ -50,7 +50,7 @@ defmodule ExShopify.ScriptTag do
   @spec create(%ExShopify.Session{}, map) :: script_tag_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/script_tags.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -78,7 +78,7 @@ defmodule ExShopify.ScriptTag do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: script_tag_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/script_tags/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: script_tag_singular | ExShopify.Resource.error
@@ -97,7 +97,7 @@ defmodule ExShopify.ScriptTag do
   @spec list(%ExShopify.Session{}, map) :: script_tag_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/script_tags.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: script_tag_plural | ExShopify.Resource.error
@@ -120,11 +120,11 @@ defmodule ExShopify.ScriptTag do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: script_tag_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/script_tags/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

@@ -26,7 +26,7 @@ defmodule ExShopify.ApplicationCharge do
   @spec activate(%ExShopify.Session{}, integer | String.t) :: application_charge_singular | ExShopify.Resource.error
   def activate(session, id) do
     request(:post, "/application_charges/#{id}/activate.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -46,7 +46,7 @@ defmodule ExShopify.ApplicationCharge do
   @spec create(%ExShopify.Session{}, map) :: application_charge_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/application_charges.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -60,7 +60,7 @@ defmodule ExShopify.ApplicationCharge do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: application_charge_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/application_charges/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: application_charge_singular | ExShopify.Resource.error
@@ -79,7 +79,7 @@ defmodule ExShopify.ApplicationCharge do
   @spec list(%ExShopify.Session{}, map) :: application_charge_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/application_charges.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: application_charge_plural | ExShopify.Resource.error
@@ -88,7 +88,7 @@ defmodule ExShopify.ApplicationCharge do
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.ApplicationCharge{}
   end
 end

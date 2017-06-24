@@ -32,11 +32,11 @@ defmodule ExShopify.Shop do
   @spec get(%ExShopify.Session{}) :: shop_singular | ExShopify.Resource.error
   def get(session) do
     request(:get, "/shop.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

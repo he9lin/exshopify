@@ -27,7 +27,7 @@ defmodule ExShopify.RecurringApplicationCharge do
   @spec activate(%ExShopify.Session{}, integer | String.t) :: recurring_application_charge_singular | ExShopify.Resource.error
   def activate(session, id) do
     request(:post, "/recurring_application_charges/#{id}/activate.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -61,7 +61,7 @@ defmodule ExShopify.RecurringApplicationCharge do
   @spec create(%ExShopify.Session{}, map) :: recurring_application_charge_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/recurring_application_charges.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -79,7 +79,7 @@ defmodule ExShopify.RecurringApplicationCharge do
   @spec customize(%ExShopify.Session{}, integer | String.t, map) :: recurring_application_charge_singular | ExShopify.Resource.error
   def customize(session, id, params) do
     request(:put, "/recurring_application_charges/#{id}/customize.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -107,7 +107,7 @@ defmodule ExShopify.RecurringApplicationCharge do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: recurring_application_charge_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/recurring_application_charges/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: recurring_application_charge_singular | ExShopify.Resource.error
@@ -126,7 +126,7 @@ defmodule ExShopify.RecurringApplicationCharge do
   @spec list(%ExShopify.Session{}, map) :: recurring_application_charge_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/recurring_application_charges.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: recurring_application_charge_plural | ExShopify.Resource.error
@@ -135,7 +135,7 @@ defmodule ExShopify.RecurringApplicationCharge do
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

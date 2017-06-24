@@ -25,7 +25,7 @@ defmodule ExShopify.ShippingZone do
   @spec list(%ExShopify.ShippingZone{}, map) :: shipping_zone_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/shipping_zones.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.ShippingZone{}) :: shipping_zone_plural | ExShopify.Resource.error
@@ -34,7 +34,7 @@ defmodule ExShopify.ShippingZone do
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{
       countries: [%ExShopify.Country{}],
       provinces: [%ExShopify.Province{}]

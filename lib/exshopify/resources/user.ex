@@ -27,7 +27,7 @@ defmodule ExShopify.User do
   @spec current(%ExShopify.Session{}) :: user_singular | ExShopify.Resource.error
   def current(session) do
     request(:get, "/users/current.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -41,7 +41,7 @@ defmodule ExShopify.User do
   @spec find(%ExShopify.Session{}, integer | String.t) :: user_singular | ExShopify.Resource.error
   def find(session, id) do
     request(:get, "/users/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -55,11 +55,11 @@ defmodule ExShopify.User do
   @spec list(%ExShopify.Session{}) :: user_plural | ExShopify.Resource.error
   def list(session) do
     request(:get, "/users.json", %{}, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

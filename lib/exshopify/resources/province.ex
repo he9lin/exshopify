@@ -40,7 +40,7 @@ defmodule ExShopify.Province do
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: province_singular | ExShopify.Resource.error
   def find(session, id, country_id, params) do
     request(:get, "/countries/#{country_id}/provinces/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t, integer | String.t) :: province_singular | ExShopify.Resource.error
@@ -59,7 +59,7 @@ defmodule ExShopify.Province do
   @spec list(%ExShopify.Session{}, integer | String.t, map) :: province_plural | ExShopify.Resource.error
   def list(session, country_id, params) do
     request(:get, "/countries/#{country_id}/provinces.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}, integer | String.t) :: province_plural | ExShopify.Resource.error
@@ -82,11 +82,11 @@ defmodule ExShopify.Province do
   @spec update(%ExShopify.Session{}, integer | String.t, integer | String.t, map) :: province_singular | ExShopify.Resource.error
   def update(session, id, country_id, params) do
     request(:put, "/countries/#{country_id}/provinces/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

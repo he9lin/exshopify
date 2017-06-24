@@ -78,7 +78,7 @@ defmodule ExShopify.ProductVariant do
   @spec create(%ExShopify.Session{}, integer | String.t, map) :: product_variant_singular | ExShopify.Resource.error
   def create(session, product_id, params) do
     request(:post, "/products/#{product_id}/variants.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -105,7 +105,7 @@ defmodule ExShopify.ProductVariant do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: product_variant_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/variants/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: product_variant_singular | ExShopify.Resource.error
@@ -124,7 +124,7 @@ defmodule ExShopify.ProductVariant do
   @spec list(%ExShopify.Session{}, integer | String.t, map) :: product_variant_plural | ExShopify.Resource.error
   def list(session, product_id, params) do
     request(:get, "/products/#{product_id}/variants.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}, integer | String.t) :: product_variant_plural | ExShopify.Resource.error
@@ -164,11 +164,11 @@ defmodule ExShopify.ProductVariant do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: product_variant_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/variants/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{
       metafields: [%ExShopify.Metafield{}]
     }

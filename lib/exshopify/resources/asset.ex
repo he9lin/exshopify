@@ -50,7 +50,7 @@ defmodule ExShopify.Asset do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: asset_singular | ExShopify.Resource.error
   def find(session, theme_id, params) do
     request(:get, "/themes/#{theme_id}/assets.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -64,7 +64,7 @@ defmodule ExShopify.Asset do
   @spec list(%ExShopify.Session{}, integer | String.t, map) :: asset_plural | ExShopify.Resource.error
   def list(session, theme_id, params) do
     request(:get, "/themes/#{theme_id}/assets.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}, integer | String.t) :: asset_plural | ExShopify.Resource.error
@@ -100,11 +100,11 @@ defmodule ExShopify.Asset do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: asset_singular | ExShopify.Resource.error
   def update(session, theme_id, params) do
     request(:put, "/themes/#{theme_id}/assets.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

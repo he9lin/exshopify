@@ -51,7 +51,7 @@ defmodule ExShopify.AbandonedCheckout do
   @spec list(%ExShopify.Session{}, map) :: abandoned_checkout_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/checkouts.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: abandoned_checkout_plural | ExShopify.Resource.error
@@ -60,14 +60,14 @@ defmodule ExShopify.AbandonedCheckout do
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.AbandonedCheckout{
       billing_address: %ExShopify.Address{},
       customer: %ExShopify.Customer{},
       discount_codes: [%ExShopify.DiscountCode{}],
       line_items: [%ExShopify.LineItem{}],
       shipping_address: %ExShopify.Address{},
-      shipping_lines: [ExShopify.ShippingLine.response_mapping],
+      shipping_lines: [ExShopify.ShippingLine.response_mapping()],
       tax_lines: [%ExShopify.TaxLine{}]
     }
   end

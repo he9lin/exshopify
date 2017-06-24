@@ -64,7 +64,7 @@ defmodule ExShopify.Blog do
   @spec create(%ExShopify.Session{}, map) :: blog_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/blogs.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -94,7 +94,7 @@ defmodule ExShopify.Blog do
   @spec find(%ExShopify.Session{}, integer | String.t, map) :: blog_singular | ExShopify.Resource.error
   def find(session, id, params) do
     request(:get, "/blogs/#{id}.json", params, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @spec find(%ExShopify.Session{}, integer | String.t) :: blog_singular | ExShopify.Resource.error
@@ -120,7 +120,7 @@ defmodule ExShopify.Blog do
   @spec list(%ExShopify.Session{}, map) :: blog_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/blogs.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: blog_plural | ExShopify.Resource.error
@@ -145,10 +145,10 @@ defmodule ExShopify.Blog do
   @spec update(%ExShopify.Session{}, integer | String.t, map) :: blog_singular | ExShopify.Resource.error
   def update(session, id, params) do
     request(:put, "/blogs/#{id}.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
-  def response_mapping do
+  def response_mapping() do
     %ExShopify.Blog{
       metafields: %ExShopify.Metafield{}
     }

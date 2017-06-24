@@ -27,7 +27,7 @@ defmodule ExShopify.Location do
   @spec find(%ExShopify.Session{}, integer | String.t) :: location_singular | ExShopify.Resource.error
   def find(session, id) do
     request(:get, "/locations/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -41,11 +41,11 @@ defmodule ExShopify.Location do
   @spec list(%ExShopify.Session{}) :: location_plural | ExShopify.Resource.error
   def list(session) do
     request(:get, "/locations.json", %{}, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end

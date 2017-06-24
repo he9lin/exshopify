@@ -58,7 +58,7 @@ defmodule ExShopify.Collect do
   @spec create(%ExShopify.Session{}, map) :: collect_singular | ExShopify.Resource.error
   def create(session, params) do
     request(:post, "/collects.json", wrap_in_object(params, @singular), session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -86,7 +86,7 @@ defmodule ExShopify.Collect do
   @spec find(%ExShopify.Session{}, integer | String.t) :: collect_singular | ExShopify.Resource.error
   def find(session, id) do
     request(:get, "/collects/#{id}.json", %{}, session)
-    |> decode(decoder(@singular, response_mapping))
+    |> decode(decoder(@singular, response_mapping()))
   end
 
   @doc """
@@ -107,7 +107,7 @@ defmodule ExShopify.Collect do
   @spec list(%ExShopify.Session{}, map) :: collect_plural | ExShopify.Resource.error
   def list(session, params) do
     request(:get, "/collects.json", params, session)
-    |> decode(decoder(@plural, [response_mapping]))
+    |> decode(decoder(@plural, [response_mapping()]))
   end
 
   @spec list(%ExShopify.Session{}) :: collect_plural | ExShopify.Resource.error
@@ -116,7 +116,7 @@ defmodule ExShopify.Collect do
   end
 
   @doc false
-  def response_mapping do
+  def response_mapping() do
     %__MODULE__{}
   end
 end
