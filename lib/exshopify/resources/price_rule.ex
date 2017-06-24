@@ -14,7 +14,7 @@ defmodule ExShopify.PriceRule do
 
   defstruct [:title, :target_type, :target_selection, :allocation_method,
              :value_type, :value, :once_per_customer, :customer_selection,
-             :entitled_collection_ids, :starts_at]
+             :entitled_collection_ids, :starts_at, :id]
 
   @doc """
   Create a price_rule.
