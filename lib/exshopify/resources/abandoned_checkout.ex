@@ -10,7 +10,6 @@ defmodule ExShopify.AbandonedCheckout do
   @type abandoned_checkout_plural :: {:ok, [%ExShopify.AbandonedCheckout{}], %ExShopify.Meta{}}
 
   @plural "checkouts"
-  @singular "checkout"
 
   defstruct [:abandoned_checkout_url, :billing_address,
              :buyer_accepts_marketing, :cancel_reason, :cart_token, :closed_at,

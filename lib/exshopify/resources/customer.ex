@@ -41,10 +41,14 @@ defmodule ExShopify.Customer do
       iex> ExShopify.Customer.count(session)
       {:ok, count, meta}
   """
+  @spec count(%ExShopify.Session{}, map) :: ExShopify.Resource.count | ExShopify.Resource.error
+  def count(session, params) do
+    request(:get, "/customers/count.json", params, session)
+    |> decode(decoder("count"))
+  end
   @spec count(%ExShopify.Session{}) :: ExShopify.Resource.count | ExShopify.Resource.error
   def count(session) do
-    request(:get, "/customers/count.json", %{}, session)
-    |> decode(decoder("count"))
+    count(session, %{})
   end
 
   @doc """

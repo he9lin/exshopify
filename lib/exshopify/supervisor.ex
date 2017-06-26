@@ -10,7 +10,7 @@ defmodule ExShopify.Supervisor do
   # callbacks
 
   def init(:ok) do
-    supervise(children, strategy: :one_for_one)
+    supervise(children(), strategy: :one_for_one)
   end
 
   # private

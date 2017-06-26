@@ -9,7 +9,6 @@ defmodule ExShopify.CustomerAddress do
   @type customer_address_plural :: {:ok, [%ExShopify.CustomerAddress{}], %ExShopify.Meta{}}
   @type customer_address_singular :: {:ok, %ExShopify.CustomerAddress{}, %ExShopify.Meta{}}
 
-  @plural "customer_addresses"
   @singular "customer_address"
 
   defstruct [:address1, :address2, :city, :company, :country, :country_code,
