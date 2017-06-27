@@ -13,6 +13,10 @@ defmodule ExShopify.API do
     req_headers = req_headers(session)
     req_url     = req_url(method, path, params, session)
 
+    if Regex.match?(~r/discount_code/, path) do
+      Process.sleep(500)
+    end
+
     HTTPoison.request(method, req_url, req_body, req_headers)
   end
 
