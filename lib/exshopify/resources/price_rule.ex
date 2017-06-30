@@ -14,7 +14,7 @@ defmodule ExShopify.PriceRule do
 
   defstruct [:title, :target_type, :target_selection, :allocation_method,
              :value_type, :value, :once_per_customer, :customer_selection,
-             :entitled_collection_ids, :starts_at, :id]
+             :entitled_collection_ids, :starts_at, :id, :usage_limit]
 
   @doc """
   Create a price_rule.
@@ -50,6 +50,21 @@ defmodule ExShopify.PriceRule do
     request(:delete, "/price_rules/#{id}.json", %{}, session)
     |> decode(nil)
   end
+
+  @doc """
+  Update a price_rule.
+
+  ## Examples
+
+      iex> ExShopify.Customer.update(session, 207119551, %{once_per_customer: false})
+      {:ok, price_rule, meta}
+  """
+  @spec update(%ExShopify.Session{}, integer | String.t, map) :: price_rule_singular | ExShopify.Resource.error
+  def update(session, id, params) do
+    request(:put, "/price_rules/#{id}.json", wrap_in_object(params, @singular), session)
+    |> decode(decoder(@singular, response_mapping()))
+  end
+
 
   @doc """
   Disable a price_rule.
