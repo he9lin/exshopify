@@ -9,7 +9,6 @@ defmodule ExShopify.Redirect do
   @type redirect_plural :: {:ok, [%ExShopify.Redirect{}], %ExShopify.Meta{}}
   @type redirect_singular :: {:ok, %ExShopify.Redirect{}, %ExShopify.Meta{}}
 
-  @plural "redirects"
   @singular "redirect"
 
   defstruct [:id, :path, :target]
